@@ -16,9 +16,22 @@ function App() {
       }
     })
   }
+  function handleAddProject(projectData){
+    setProjectState(prev=>{
+      const newProject={
+        ...projectData,
+        id:Math.random()
+      }
+      return {
+        ...prev,
+        projects: [...prev.projects, newProject],
+      }
+    })
+  }
+  console.log(projectState,666)
   let content;
   if(projectState.selectedProject===null){
-    content=<NewProject />
+    content=<NewProject onAdd={handleAddProject} />
   }else if(projectState.selectedProject==undefined){
     content=<NoProjectSelected onStartAddProject={handleStartAddProject} />
 
