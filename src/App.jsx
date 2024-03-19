@@ -8,11 +8,25 @@ function App() {
     selectedProject: undefined,
     projects: []
   })
+  function handleStartAddProject(){
+    setProjectState(prev=>{
+      return {
+        ...prev,
+        selectedProject: null,
+      }
+    })
+  }
+  let content;
+  if(projectState.selectedProject===null){
+    content=<NewProject />
+  }else if(projectState.selectedProject==undefined){
+    content=<NoProjectSelected onStartAddProject={handleStartAddProject} />
+
+  }
   return (
     <main className='h-screen my-8 flex gap-8' >
-      <ProjectSidBarr />
-      {/* <NewProject /> */}
-      <NoProjectSelected />
+      <ProjectSidBarr onStartAddProject={handleStartAddProject} />
+      {content}
     </main>
   );
 }
